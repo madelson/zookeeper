@@ -19,14 +19,13 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Copyright>© Shay Hazor</Copyright>
-    <Authors>shayhatsor2</Authors>
+    <Copyright>© 2022 Michael Adelson</Copyright>
+    <Authors>Michael Adelson</Authors>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/shayhatsor/zookeeper</RepositoryUrl>
+    <RepositoryUrl>https://github.com/madelson/zookeeper</RepositoryUrl>
     <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
     <PackageReleaseNotes>
-      This project is actively maintained at: https://github.com/shayhatsor/zookeeper
-      Please feel free to open an issue or ask a question there.
+      This package is a fork of ZooKeeperNetEx addressing https://github.com/shayhatsor/zookeeper/issues/45.
     </PackageReleaseNotes>
     <PackageIconUrl>https://svn.apache.org/repos/asf/comdev/project-logos/originals/zookeeper.svg</PackageIconUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>

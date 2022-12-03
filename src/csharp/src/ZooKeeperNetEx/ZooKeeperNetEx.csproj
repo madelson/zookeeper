@@ -8,7 +8,7 @@
 	<Product>$(AssemblyTitle)</Product>
     <Title>$(AssemblyTitle)</Title>
 	
-    <PackageId>ZooKeeperNetEx</PackageId>
+    <PackageId>Medallion.ZooKeeperNetEx</PackageId>
     <AssemblyName>$(PackageId)</AssemblyName>
     
 	<PackageTags>ZooKeeper;.NET;Client;Async</PackageTags>

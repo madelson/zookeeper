@@ -4,7 +4,8 @@
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
     <DelaySign>False</DelaySign>
-    <VersionPrefix>3.4.12.4</VersionPrefix>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionSuffix>alpha001</VersionSuffix>
     <langVersion>latest</langVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
