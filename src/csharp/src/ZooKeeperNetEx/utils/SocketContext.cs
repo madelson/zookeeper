@@ -74,7 +74,9 @@ namespace ZooKeeperNetEx.utils
 
             var socketAsyncEventArgs = _socketAsyncEventArgs; 
 
-            if (socketAsyncEventArgs.LastOperation == SocketAsyncOperation.Receive && _socket.Available == 0)
+            if (socketAsyncEventArgs.LastOperation == SocketAsyncOperation.Receive 
+                && _socket.Available == 0
+                && !IsSocketConnected())
             {
                 socketAsyncEventArgs.SocketError = SocketError.ConnectionReset;
             }
@@ -84,6 +86,25 @@ namespace ZooKeeperNetEx.utils
                 throw new SocketException((int) socketAsyncEventArgs.SocketError);
             }
             return socketAsyncEventArgs.LastOperation;
+        }
+
+        private bool IsSocketConnected()
+        {
+            // based on https://learn.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.connected
+
+            var originalBlockingState = _socket.Blocking;
+            try
+            {
+                _socket.Blocking = false;
+                _socket.Send(new byte[1], size: 0, SocketFlags.None);
+            }
+            catch (SocketException) { }
+            finally
+            {
+                _socket.Blocking = originalBlockingState;
+            }
+
+            return _socket.Connected;
         }
       
         private void ThrowIfDisposed()
