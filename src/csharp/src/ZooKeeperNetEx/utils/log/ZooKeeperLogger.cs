@@ -1,12 +1,13 @@
 using System;
 using System.Diagnostics;
+using ZooKeeperNetEx;
 
 namespace org.apache.utils
 {
     internal class ZooKeeperLogger
     {
         internal static readonly ZooKeeperLogger Instance = new ZooKeeperLogger();
-        internal ILogConsumer CustomLogConsumer;
+        internal ILogConsumer CustomLogConsumer = new DebugLog();
         internal TraceLevel LogLevel = TraceLevel.Warning;
         private readonly LogWriter logWriter = new LogWriter();
         internal bool LogToFile
@@ -33,7 +34,7 @@ namespace org.apache.utils
                 return;
             }
 
-            logWriter.Log(sev, className, message, exception);
+            //logWriter.Log(sev, className, message, exception);
             var logConsumer = CustomLogConsumer;
             if (logConsumer == null) return;
             try

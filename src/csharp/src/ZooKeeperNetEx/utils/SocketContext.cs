@@ -1,4 +1,7 @@
-﻿using System;
+﻿using org.apache.utils;
+using org.apache.zookeeper;
+using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 
@@ -7,6 +10,8 @@ namespace ZooKeeperNetEx.utils
     // https://github.com/dotnet/corefx/blob/master/src/System.Net.Sockets/src/System/Net/Sockets/Socket.Tasks.cs
     internal class SocketContext : IDisposable
     {
+        private static readonly ILogProducer LOG = TypeLogger<SocketContext>.Instance;
+
         private readonly SocketAsyncEventArgs _socketAsyncEventArgs;
 
         private readonly AwaitableSignal _awaitableSignal;
@@ -70,6 +75,11 @@ namespace ZooKeeperNetEx.utils
         {
             ThrowIfDisposed();
 
+            if (LOG.isDebugEnabled())
+            {
+                LOG.debug($"State={_state.Value}, LastOp={_socketAsyncEventArgs?.LastOperation}, Error={_socketAsyncEventArgs?.SocketError}, Available={_socket?.Available}, Connected={_socket?.Connected}");
+            }
+
             if (_state.Value == PENDING) return SocketAsyncOperation.None;
 
             var socketAsyncEventArgs = _socketAsyncEventArgs; 
@@ -104,6 +114,10 @@ namespace ZooKeeperNetEx.utils
                 _socket.Blocking = originalBlockingState;
             }
 
+            if (LOG.isDebugEnabled())
+            {
+                LOG.debug($"ConnectedCheck: Connected={_socket.Connected}");
+            }
             return _socket.Connected;
         }
       
